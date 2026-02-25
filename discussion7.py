@@ -6,32 +6,24 @@ import csv
 ##### TASK 1: CSV READER
 ###############################################################################
 def load_listings(f):
-    """
-    Read the Airbnb listings CSV and return a list of records.
+    listings = []
+    with open(full_path, newline='', encoding='utf-8') as csvfile:
+        reader = csv.reader(csvfile)
+        header = next(reader)  # First row is the header
 
-    Parameters:
-        f : str
-            Filename or path to a CSV file containing Airbnb listings.
+        for row in reader:
+            listing = {}
+            for i in range(len(header)):
+                listing[header[i]] = row[i]
+            listings.append(listing)
 
-    Expected CSV header: id, name, host_id, neighbourhood, neighbourhood_group, latitude,
-        longitude, room_type, price, minimum_nights, ...
-
-    Returns:
-        list of dictionaries
-            A list where each element is a dictionary representing one listing.
-            Each dictionary has:
-                - Keys (str): Column names from the CSV header 
-                  (e.g., 'id', 'name', 'host_id', 'neighbourhood', 'price', etc.)
-                - Values (str): Corresponding values from that row
-                  (NOTE: All values are strings, including numbers, which means you will need to convert them in later functions)
-    """
+        return listings
     # Do not modify this code
     # This opens the CSV and saves it as a list of lists
     base_path = os.path.abspath(os.path.dirname(__file__))
     full_path = os.path.join(base_path, f)
 
     # TODO: Read the CSV using csv.reader and convert it to a list a dictionaries
-    pass
 
 ###############################################################################
 ##### TASK 2: CALCULATION FUNCTION (single calculation)
