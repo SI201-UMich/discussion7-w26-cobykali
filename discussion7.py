@@ -45,7 +45,17 @@ def calculate_avg_price_by_neighbourhood_group_and_room(listings):
             price = float(price_str)
         except ValueError:
             continue
+        key = (neighbourhood_group, room_type)
 
+        totals[key] = totals.get(key, 0) + price
+        counts[key] = counts.get(key, 0) + 1
+
+    averages = {}
+
+    for key in totals:
+        averages[key] = totals[key] / counts[key]
+
+    return averages
 
 
 
